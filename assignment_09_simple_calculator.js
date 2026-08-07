@@ -74,4 +74,105 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+function add(a, b) {
+  return a + b;
+}   
 
+function subtract(a, b) {
+  return a - b;
+}   
+
+function multiply(a, b) {
+  return a * b;
+}   
+
+function divide(a, b) {
+  if (b === 0) {
+    console.log("Error: Cannot divide by zero.");
+    return null;
+  }
+
+    return a / b;
+}   
+
+function modulus(a, b) {
+  if (b === 0) {
+    console.log("Error: Cannot perform modulus by zero.");
+    return null;
+  }     
+    return a % b;   
+}
+
+function exponentiate(a, b) {
+  return a ** b;
+}       
+
+function main() {
+  const readlineSync = require('readline-sync');
+  let shouldContinue = true;
+
+  while (shouldContinue) {
+    console.log(" ============================");
+    console.log("        SIMPLE CALCULATOR");
+    console.log(" ============================");
+    console.log(" 1. Addition");
+    console.log(" 2. Subtraction");
+    console.log(" 3. Multiplication");
+    console.log(" 4. Division");
+    console.log(" 5. Modulus");
+    console.log(" 6. Exponentiation");
+    console.log(" 7. Quit");
+    const choice = readlineSync.question("Select an operation (1-7): ");
+
+    switch (choice) {
+      case "1":
+        const num1 = parseFloat(readlineSync.question("Enter first number: "));
+        const num2 = parseFloat(readlineSync.question("Enter second number: "));
+        const sum = add(num1, num2);
+        console.log(`Result: ${num1} + ${num2} = ${sum.toFixed(2)}`);
+        break;
+      case "2":
+        const num3 = parseFloat(readlineSync.question("Enter first number: "));
+        const num4 = parseFloat(readlineSync.question("Enter second number: "));
+        const difference = subtract(num3, num4);
+        console.log(`Result: ${num3} - ${num4} = ${difference.toFixed(2)}`);
+        break;
+      case "3":
+        const num5 = parseFloat(readlineSync.question("Enter first number: "));
+        const num6 = parseFloat(readlineSync.question("Enter second number: "));
+        const product = multiply(num5, num6);
+        console.log(`Result: ${num5} * ${num6} = ${product.toFixed(2)}`);
+        break;
+      case "4":
+        const num7 = parseFloat(readlineSync.question("Enter first number: "));
+        const num8 = parseFloat(readlineSync.question("Enter second number: "));
+        const quotient = divide(num7, num8);
+        if (quotient !== null) {
+          console.log(`Result: ${num7} / ${num8} = ${quotient.toFixed(2)}`);
+        }
+        break;
+      case "5":
+        const num9 = parseFloat(readlineSync.question("Enter first number: "));
+        const num10 = parseFloat(readlineSync.question("Enter second number: "));
+        const remainder = modulus(num9, num10);
+        if (remainder !== null) {
+          console.log(`Result: ${num9} % ${num10} = ${remainder.toFixed(2)}`);
+        }
+        break;
+      case "6":
+        const num11 = parseFloat(readlineSync.question("Enter first number: "));
+        const num12 = parseFloat(readlineSync.question("Enter second number: "));
+        const power = exponentiate(num11, num12);
+        console.log(`Result: ${num11} ** ${num12} = ${power.toFixed(2)}`);
+        break;
+      case "7":
+        console.log("Goodbye!");
+        shouldContinue = false;
+        break;
+      default:
+        console.log("Invalid choice. Please select a valid operation.");
+    }
+  }
+}
+
+main();
