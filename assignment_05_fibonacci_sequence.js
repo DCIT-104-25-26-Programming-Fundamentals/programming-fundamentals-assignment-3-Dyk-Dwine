@@ -54,4 +54,54 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+function generateFibonacci(n) {
+  if (n <= 0) {
+    console.log("Error: Please enter a positive integer.");
+    return;
+  } 
+
+  function isFibonacci(num) {
+    let a = 0, b = 1;   
+
+    while (b < num) {
+      const next = a + b;
+      a = b;
+      b = next;
+    }   
+
+    return b === num || num === 0;
+  } 
+
+  function printFibonacciSequence(n) {
+    let a = 0, b = 1;
+    const sequence = [a];       
+
+    for (let i = 1; i < n; i++) {
+      sequence.push(b);
+      const next = a + b;
+      a = b;
+      b = next;
+    }
+    
+    console.log(`Fibonacci sequence: ${sequence.join(' ')}`);
+  } 
+
+  function checkFibonacciNumber(num) {
+    if (isFibonacci(num)) {
+      console.log(`${num} is a Fibonacci number.`);
+    } else {
+      console.log(`${num} is NOT a Fibonacci number.`);
+    }   
+
+    }   
+
+    function main() {
+      const n = parseInt(readlineSync.question('How many terms? '));
+      printFibonacciSequence(n);    
+      const num = parseInt(readlineSync.question('Enter a number to check: '));
+      checkFibonacciNumber(num);
+    }
+
+    main(); 
+} 
 
