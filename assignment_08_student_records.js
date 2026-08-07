@@ -84,4 +84,92 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+function addStudent(students) {
+  const name = readlineSync.question('Student name: ');
+  const id = parseInt(readlineSync.question('Student ID: '));
+  const numScores = parseInt(readlineSync.question('How many scores? '));
+  const scores = [];
+
+  for (let i = 0; i < numScores; i++) {
+    const score = parseFloat(readlineSync.question(`Enter score ${i + 1}: `));
+    scores.push(score);
+  }
+
+  const student = { name, id, scores };
+  students.push(student);
+  console.log(`Student "${name}" added successfully.`);
+}       
+
+function displayAllStudents(students) {
+  if (students.length === 0) {
+    console.log("No students have been added yet.");
+    return;
+  }     
+
+    console.log("Name\t\tID\t\tScores\t\tAverage");
+    for (const student of students) {
+      const average = calculateAverage(student.scores);
+      console.log(`${student.name}\t\t${student.id}\t\t${student.scores.join(', ')}\t\t${average.toFixed(2)}`);
+    }
+} 
+
+function calculateAverageScore(students) {
+  const id = parseInt(readlineSync.question('Enter student ID: '));
+  const student = students.find(s => s.id === id);  
+  
+  if (student) {
+    const average = calculateAverage(student.scores);
+    console.log(`${student.name}'s average score: ${average.toFixed(2)}`);
+  } else {
+    console.log("Student not found.");
+  }
+}
+
+function main() {
+  const students = [];
+  let choice;
+
+    do {
+        console.log("\n===============================");
+        console.log("      STUDENT RECORD SYSTEM MENU");
+        console.log("===============================");
+        console.log("1. Add student");
+        console.log("2. Display all students");
+        console.log("3. Calculate average score");
+        console.log("4. Quit");
+        choice = readlineSync.question('Enter your choice (1-4): ');
+        
+        switch (choice) {
+            case '1':
+                addStudent(students);
+                break;
+            case '2':
+                displayAllStudents(students);
+                break;
+            case '3':
+                calculateAverageScore(students);
+                break;
+            case '4':
+                console.log("Goodbye!");
+                break;
+            default:
+                console.log("Invalid choice. Please enter a number between 1 and 4.");
+        }
+    } while (choice !== '4');
+}
+
+function calculateAverage(scores) {
+  if (scores.length === 0) return 0;
+  const sum = scores.reduce((acc, score) => acc + score, 0);
+  return sum / scores.length;
+}   
+
+function runStudentRecordSystem() {
+  const readlineSync = require('readline-sync');
+  main();
+}   
+
+main();
+
+
 
