@@ -81,4 +81,72 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+function addTask(tasks) {
+  const taskDescription = readlineSync.question('Enter task: ');
+  tasks.push(taskDescription);
+  console.log(`Task added: "${taskDescription}"`);
+}       
+
+function viewTasks(tasks) {
+  if (tasks.length === 0) {
+    console.log("Your task list is empty.");
+  } else {
+    console.log("Your Tasks:");
+    for (let i = 0; i < tasks.length; i++) {
+      console.log(`${i + 1}. ${tasks[i]}`);
+    }
+  }
+
+}
+
+function deleteTask(tasks) {
+  if (tasks.length === 0) {
+    console.log("Your task list is empty. Nothing to delete.");
+    return;
+  } 
+
+    viewTasks(tasks);   
+    const taskNumber = parseInt(readlineSync.question('Enter task number to delete: '));
+    if (taskNumber >= 1 && taskNumber <= tasks.length) {
+      const deletedTask = tasks.splice(taskNumber - 1, 1);
+      console.log(`Task "${deletedTask[0]}" has been removed.`);
+    } else {
+      console.log("Invalid task number.");
+    }
+}   
+
+function main() {
+  const tasks = [];
+  let choice;   
+
+    do { 
+        console.log("\n============================");  
+        console.log("        TO-DO LIST MENU");
+        console.log("============================");
+        console.log("1. Add task");
+        console.log("2. View tasks");
+        console.log("3. Delete task");
+        console.log("4. Quit");
+        choice = parseInt(readlineSync.question("Enter your choice (1-4): "));
+        
+        switch (choice) {
+            case 1:
+                addTask(tasks);
+                break;
+            case 2:
+                viewTasks(tasks);
+                break;
+            case 3:
+                deleteTask(tasks);
+                break;
+            case 4:
+                console.log("Goodbye!");
+                break;
+            default:
+                console.log("Invalid choice. Please enter a number between 1 and 4.");
+        }
+    } while (choice !== 4);
+}
+
+main(); 
 
